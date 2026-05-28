@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>求人情報 | TARTE BIJOUX</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Noto+Serif+JP:wght@200;300;400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --cream: #FAF6F0;
+      --warm-white: #FFFDF9;
+      --gold: #C9A96E;
+      --gold-light: #E8D5B0;
+      --gold-pale: #F5EDD8;
+      --brown: #6B4F32;
+      --brown-dark: #3D2B1A;
+      --text-body: #4A3728;
+      --text-muted: #8A7060;
+      --text-light: #B09880;
+      --border: rgba(201,169,110,0.25);
+      --border-strong: rgba(201,169,110,0.5);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--cream);
+      color: var(--text-body);
+      font-family: 'Noto Serif JP', serif;
+      font-weight: 300;
+      line-height: 1.8;
+      min-height: 100vh;
+    }
+
+    /* ── HEADER ── */
+    header {
+      background: var(--brown-dark);
+      padding: 2rem 0 1.6rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    header::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: repeating-linear-gradient(
+        45deg,
+        transparent,
+        transparent 40px,
+        rgba(201,169,110,0.04) 40px,
+        rgba(201,169,110,0.04) 41px
+      );
+    }
+    .header-eyebrow {
+      font-family: 'Jost', sans-serif;
+      font-weight: 300;
+      font-size: 0.65rem;
+      letter-spacing: 0.35em;
+      color: var(--gold-light);
+      text-transform: uppercase;
+      margin-bottom: 0.75rem;
+    }
+    .header-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 6vw, 3.2rem);
+      font-weight: 300;
+      color: #FAF2E4;
+      letter-spacing: 0.12em;
+      line-height: 1;
+    }
+    .header-logo em {
+      font-style: italic;
+      font-weight: 300;
+      color: var(--gold);
+    }
+    .header-divider {
+      width: 60px;
+      height: 1px;
+      background: var(--gold);
+      margin: 1rem auto;
+      opacity: 0.6;
+    }
+    .header-sub {
+      font-family: 'Jost', sans-serif;
+      font-weight: 300;
+      font-size: 0.7rem;
+      letter-spacing: 0.28em;
+      color: rgba(232,213,176,0.65);
+      text-transform: uppercase;
+    }
+
+    /* ── HERO BANNER ── */
+    .hero {
+      background: var(--brown);
+      padding: 3.5rem 1.5rem 3rem;
+      text-align: center;
+      position: relative;
+    }
+    .hero::after {
+      content: '';
+      display: block;
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 40px;
+      background: var(--cream);
+      clip-path: ellipse(55% 100% at 50% 100%);
+    }
+    .hero-badge {
+      display: inline-block;
+      font-family: 'Jost', sans-serif;
+      font-size: 0.6rem;
+      font-weight: 400;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: var(--gold);
+      border: 1px solid var(--gold);
+      padding: 0.3rem 1.2rem;
+      margin-bottom: 1.5rem;
+    }
+    .hero-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.8rem, 5vw, 2.8rem);
+      font-weight: 300;
+      color: #FAF2E4;
+      letter-spacing: 0.08em;
+      line-height: 1.3;
+      margin-bottom: 0.5rem;
+    }
+    .hero-title span {
+      font-style: italic;
+      color: var(--gold-light);
+    }
+    .hero-text {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 0.8rem;
+      color: rgba(232,213,176,0.75);
+      margin-top: 1rem;
+      letter-spacing: 0.05em;
+      padding-bottom: 1rem;
+    }
+
+    /* ── MAIN CONTAINER ── */
+    .container {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 0 1.25rem;
+    }
+
+    /* ── SECTION LABEL ── */
+    .section-label {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin: 2.5rem 0 1.2rem;
+    }
+    .section-label::before,
+    .section-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border-strong);
+    }
+    .section-label span {
+      font-family: 'Jost', sans-serif;
+      font-size: 0.6rem;
+      font-weight: 400;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: var(--gold);
+      white-space: nowrap;
+    }
+
+    /* ── JOB CARDS ── */
+    .jobs-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-bottom: 0.5rem;
+    }
+    @media (max-width: 540px) {
+      .jobs-grid { grid-template-columns: 1fr; }
+    }
+    .job-card {
+      background: var(--warm-white);
+      border: 1px solid var(--border-strong);
+      padding: 1.5rem 1.25rem;
+      position: relative;
+      transition: border-color 0.3s, box-shadow 0.3s;
+    }
+    .job-card:hover {
+      border-color: var(--gold);
+      box-shadow: 0 4px 20px rgba(201,169,110,0.12);
+    }
+    .job-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 3px; height: 100%;
+      background: var(--gold);
+    }
+    .job-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2rem;
+      font-weight: 300;
+      color: var(--gold-light);
+      line-height: 1;
+      margin-bottom: 0.4rem;
+    }
+    .job-type {
+      font-family: 'Jost', sans-serif;
+      font-size: 0.6rem;
+      font-weight: 400;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.6rem;
+    }
+    .job-name {
+      font-size: 0.88rem;
+      font-weight: 400;
+      color: var(--brown-dark);
+      line-height: 1.6;
+    }
+    .job-desc {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      margin-top: 0.5rem;
+      line-height: 1.7;
+    }
+
+    /* ── INFO TABLE ── */
+    .info-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    .info-table tr {
+      border-bottom: 1px solid var(--border);
+    }
+    .info-table tr:first-child {
+      border-top: 1px solid var(--border);
+    }
+    .info-table th {
+      width: 7em;
+      padding: 1rem 0.75rem 1rem 0;
+      font-family: 'Jost', sans-serif;
+      font-size: 0.6rem;
+      font-weight: 400;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gold);
+      vertical-align: top;
+      white-space: nowrap;
+      text-align: left;
+    }
+    .info-table td {
+      padding: 1rem 0 1rem 0.5rem;
+      font-size: 0.8rem;
+      color: var(--text-body);
+      line-height: 1.85;
+      vertical-align: top;
+    }
+    .info-table td strong {
+      font-weight: 400;
+      color: var(--brown-dark);
+    }
+
+    /* ── HIGHLIGHTS ── */
+    .highlights {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.75rem;
+      margin: 0.5rem 0;
+    }
+    @media (max-width: 480px) {
+      .highlights { grid-template-columns: 1fr; }
+    }
+    .highlight-item {
+      background: var(--gold-pale);
+      border: 1px solid var(--border-strong);
+      padding: 1.1rem 1rem;
+      text-align: center;
+    }
+    .highlight-icon {
+      font-size: 1.4rem;
+      margin-bottom: 0.4rem;
+      display: block;
+    }
+    .highlight-label {
+      font-family: 'Jost', sans-serif;
+      font-size: 0.58rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--gold);
+      display: block;
+      margin-bottom: 0.2rem;
+    }
+    .highlight-text {
+      font-size: 0.73rem;
+      color: var(--brown-dark);
+      line-height: 1.55;
+    }
+
+    /* ── WELCOME MESSAGE ── */
+    .welcome-box {
+      background: var(--brown-dark);
+      padding: 2rem 1.75rem;
+      margin: 1rem 0;
+      position: relative;
+      overflow: hidden;
+    }
+    .welcome-box::before {
+      content: '"';
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 10rem;
+      color: rgba(201,169,110,0.08);
+      position: absolute;
+      top: -2rem; left: 0.5rem;
+      line-height: 1;
+      pointer-events: none;
+    }
+    .welcome-box p {
+      font-size: 0.82rem;
+      color: rgba(232,213,176,0.88);
+      line-height: 2;
+      letter-spacing: 0.04em;
+      position: relative;
+    }
+    .welcome-box p + p { margin-top: 1rem; }
+
+    /* ── APPLY CTA ── */
+    .cta-section {
+      text-align: center;
+      padding: 2.5rem 0 3.5rem;
+    }
+    .cta-note {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      margin-bottom: 1.5rem;
+      letter-spacing: 0.05em;
+    }
+    .cta-btn {
+      display: inline-block;
+      background: var(--gold);
+      color: var(--warm-white);
+      font-family: 'Jost', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 400;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 1.1rem 3.5rem;
+      border: none;
+      cursor: pointer;
+      transition: background 0.3s, letter-spacing 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+    .cta-btn::after {
+      content: '→';
+      margin-left: 1.2em;
+      transition: transform 0.3s;
+      display: inline-block;
+    }
+    .cta-btn:hover {
+      background: var(--brown);
+      letter-spacing: 0.5em;
+    }
+    .cta-btn:hover::after {
+      transform: translateX(4px);
+    }
+    .cta-sub {
+      font-size: 0.65rem;
+      color: var(--text-light);
+      margin-top: 1rem;
+      letter-spacing: 0.05em;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--brown-dark);
+      text-align: center;
+      padding: 1.5rem;
+    }
+    footer p {
+      font-family: 'Jost', sans-serif;
+      font-size: 0.6rem;
+      font-weight: 300;
+      letter-spacing: 0.25em;
+      color: rgba(232,213,176,0.4);
+      text-transform: uppercase;
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .fade-up {
+      opacity: 0;
+      animation: fadeUp 0.7s ease forwards;
+    }
+    .delay-1 { animation-delay: 0.15s; }
+    .delay-2 { animation-delay: 0.3s; }
+    .delay-3 { animation-delay: 0.45s; }
+    .delay-4 { animation-delay: 0.6s; }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <h1 style="line-height:1;">
+    <img src="TarteBijoux_logo_v1_color_1_02yoko.jpg"
+         alt="TARTE BIJOUX ATAMI"
+         style="width: min(320px, 72vw); filter: brightness(0) invert(1); opacity: 0.92; display: block; margin: 0 auto;">
+  </h1>
+  <div class="header-divider"></div>
+  <p class="header-sub">Staff Recruitment</p>
+</header>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="fade-up">
+    <p class="hero-badge">Hiring Now</p>
+    <h2 class="hero-title">一緒に、<span>宝石のような</span><br>タルトをつくりませんか。</h2>
+    <p class="hero-text">静岡県熱海市 ／ アルバイト・パート募集</p>
+  </div>
+</div>
+
+<!-- MAIN -->
+<div class="container">
+
+  <!-- JOB TYPES -->
+  <div class="section-label fade-up delay-1"><span>Position</span></div>
+  <div class="jobs-grid fade-up delay-2">
+    <div class="job-card">
+      <p class="job-num">01</p>
+      <p class="job-type">Kitchen</p>
+      <p class="job-name">製造・キッチンスタッフ</p>
+      <p class="job-desc">タルトの仕上げ、仕込み、片付けなど。丁寧なものづくりを一緒に。</p>
+    </div>
+    <div class="job-card">
+      <p class="job-num">02</p>
+      <p class="job-type">Sales</p>
+      <p class="job-name">販売・接客スタッフ</p>
+      <p class="job-desc">レジ、お渡し、商品説明、簡単な軽作業など。笑顔でお客様をお迎えします。</p>
+    </div>
+  </div>
+
+  <!-- HIGHLIGHTS -->
+  <div class="section-label fade-up delay-2"><span>Benefits</span></div>
+  <div class="highlights fade-up delay-3">
+    <div class="highlight-item">
+      <span class="highlight-icon">🎓</span>
+      <span class="highlight-label">未経験OK</span>
+      <span class="highlight-text">はじめての方、大歓迎！丁寧にお教えします</span>
+    </div>
+    <div class="highlight-item">
+      <span class="highlight-icon">🕐</span>
+      <span class="highlight-label">シフト自由</span>
+      <span class="highlight-text">土日祝のみ・午前のみ・フルタイムなどご相談可</span>
+    </div>
+    <div class="highlight-item">
+      <span class="highlight-icon">🥧</span>
+      <span class="highlight-label">スタッフ割引</span>
+      <span class="highlight-text">美味しいタルトがお得に購入できます！</span>
+    </div>
+  </div>
+
+  <!-- INFO TABLE -->
+  <div class="section-label fade-up delay-2"><span>Details</span></div>
+  <table class="info-table fade-up delay-3">
+    <tr>
+      <th>雇用形態</th>
+      <td>アルバイト ／ パート</td>
+    </tr>
+    <tr>
+      <th>給与</th>
+      <td>時給 <strong>1200円〜</strong><br><span style="font-size:0.7rem;color:var(--text-muted)">※ 能力・経験に応じて優遇</span></td>
+    </tr>
+    <tr>
+      <th>勤務地</th>
+      <td>静岡県熱海市咲見町7-48</td>
+    </tr>
+    <tr>
+      <th>勤務時間</th>
+      <td>
+        9:00 〜 17:00<br>
+        週2日〜、1日4時間〜 OK ／ シフト制<br>
+        <span style="font-size:0.7rem;color:var(--text-muted)">「土日祝のみ」「午前のみ」「フルタイム」などご相談に応じます</span>
+      </td>
+    </tr>
+    <tr>
+      <th>応募資格</th>
+      <td>
+        未経験者大歓迎！<br>
+        お菓子が好きな方、人を笑顔にするのが好きな方<br>
+        主婦（夫）さん・学生さん・フリーターさん、みなさん歓迎！
+      </td>
+    </tr>
+    <tr>
+      <th>待遇</th>
+      <td>
+        制服貸与<br>
+        交通費規定支給<br>
+        スタッフ割引あり
+      </td>
+    </tr>
+  </table>
+
+  <!-- WELCOME MESSAGE -->
+  <div class="section-label fade-up delay-3"><span>From Us</span></div>
+  <div class="welcome-box fade-up delay-4">
+    <p>TARTE BIJOUXは、熱海の地で「宝石のようなタルト」をお届けするアトリエブティックです。</p>
+    <p>ひとつひとつ丁寧に仕上げたタルトを通じて、お客様に笑顔と感動をお届けすること——それが私たちの喜びです。経験よりも、「好き」という気持ちを大切にします。あなたと一緒に働ける日を楽しみにしています。</p>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta-section fade-up delay-4">
+    <p class="cta-note">下のボタンからGoogleフォームにて受け付けております</p>
+    <a href="YOUR_GOOGLE_FORM_URL_HERE" class="cta-btn">応募フォームへ</a>
+    <p class="cta-sub">※ ご応募後、担当者よりご連絡いたします</p>
+  </div>
+
+</div><!-- /container -->
+
+<footer>
+  <p>© TARTE BIJOUX — Atami, Shizuoka</p>
+</footer>
+
+</body>
+</html>
